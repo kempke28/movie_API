@@ -1,0 +1,5 @@
+{"_id":{"$oid":"60a8d66237f59be3e29b1ca7"},"name":"Rodrigo","username":"Rupunpun","email":"Rupupum@mail.com","password":"yeahbligo","favMovies":[{"$oid":"60a8cf5e37f59be3e29b1ca3"},{"$oid":"60a8ced837f59be3e29b1c9f"}]}
+{"_id":{"$oid":"60a92b6eff5d1b0ae5e9926a"},"name":"Noverya","username":"Noverya435","email":"novinovi@mail.com","password":"noviesnovi","favMmovies":[],"favMovies":[{"$oid":"60a8c96337f59be3e29b1c9d"},{"$oid":"60a8c68c37f59be3e29b1c9c"}]}
+{"_id":{"$oid":"60a92b6eff5d1b0ae5e9926b"},"name":"barrilito","username":"barrilito450","email":"donbarril@mail.com","password":"großebarril","favMmovies":[],"favMovies":[{"$oid":"60a8ced837f59be3e29b1c9f"},{"$oid":"60a8cd5037f59be3e29b1c9e"}]}
+{"_id":{"$oid":"60a92b6eff5d1b0ae5e9926c"},"name":"Natalia","username":"Natydiekleine","email":"natymail@mail.com","password":"natynaty0280","favMmovies":[],"favMovies":[{"$oid":"60a8ced837f59be3e29b1c9f"}]}
+{"_id":{"$oid":"60a92b6eff5d1b0ae5e9926d"},"name":"Nero","username":"Nerolufzic","email":"Derlufzic@mail.com","password":"lufzicanyou","favMmovies":[],"favMovies":[{"$oid":"60a8ced837f59be3e29b1c9f"},{"$oid":"60a8ced837f59be3e29b1c9f"}]}

@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies_API</title>
+</head>
+<body>
+
+    <p>Instructions for API, a nice movie API</p>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Request description</th>
+                    <th>endpoint URL</th>
+                    <th>HTTP Method</th>
+                    <th>The format of data expected in the body of the request (and an example)</th>
+                    <th>The format of the response data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Return all movies from List/array</td>
+                    <td>/animationMovies/</td>
+                    <td>GET</td>
+                    <td>none</td>
+                    <td>JSON formar of the complete list of movies</td>
+                    <td>JSON response returning the complete list of selected movies.</td>
+                </tr>
+                    <td>Return movie selected by name</td>
+                    <td>/animationMovies/:name</td>
+                    <td>GET</td>
+                    <td>none</td>
+                    <td>JSON format of selected movie</td>
+                    <td>JSON response returning a selected movies form the list of movies</td>
+                </tr>
+                <tr>
+                    <td>Return movie selected by director name</td>
+                    <td>/animationMovie/:director</td>
+                    <td>GET</td>
+                    <td>none</td>
+                    <td>JSON format of selected movie</td>
+                    <td>JSON response selecting the movie through the director of the movie </td>
+                </tr>
+                <tr>
+                    <td>Create new element/movie in the list of movies</td>
+                    <td>/addAnimationMovie/</td>
+                    <td>POST</td>
+                    <td>JSON format of movie or element to add in the list.
+                        {
+                            title: 'Lightyear',
+                            releaseDate: 'June 17, 2022',
+                            director: 'Angus MacLane'
+                        }, 
+                    </td>
+                    <td>JSON format added to the list</td>
+                    <td>Create new movie in JSON file.</td>
+                <tr>
+                    <td>Create a new User in the list</td>
+                    <td>/newMovieUsers/</td>
+                    <td>POST</td>
+                    <td>JSON format of user to be added in the list
+                        {
+                            "name": "Xin Hua",
+                            "username" : "xinxin",
+                            "password" : "String",
+                            "email" : "xin.xin@mail.com"
+                    }
+                    </td>
+                    <td>JSON format with the new user created</td>
+                    <td>JSON response from the list of users, able to create a new user in JSON file</td>
+                </tr>
+                <tr>
+                    <td>Edit user username in the user list</td>
+                    <td>/movieUsers/:username</td>
+                    <td>PUT</td>
+                    <td>JSON format of new data to enter
+                        {
+                            "username" : "donverga"
+                        }
+                    </td>
+                    <td>JSON format of the new edited user</td>
+                    <td>Update user in JSON file</td>
+                <tr>
+                    <td>Delete user from the list of users</td>
+                    <td>DELETE</td>
+                    <td>none</td>
+                    <td>Succesful message that was deleted</td>
+                    <td>remove user in JSON file and from the list forever.</td>
+                </tr>
+                </tr>
+                
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+</html>
