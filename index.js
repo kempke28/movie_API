@@ -53,10 +53,6 @@ app.use(cors({
   }
 }));
 
-//Bcrypt or Hashing is turning the string (password), into another stings that can not be turn into the original string 
-//only readable for the code.
-
-const bcrypt = require('bcrypt');
 
 let userSchema = mongoose.Schema({
   Username: {type: String, required: true},
