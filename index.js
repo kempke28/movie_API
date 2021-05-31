@@ -1,4 +1,5 @@
 const express = require( 'express');
+const { check, validationResult } = require('express-validator');
 const morgan = require ( 'morgan' );
 const app = express();
 app.use(morgan('common'));
