@@ -5,12 +5,12 @@ const app = express();
 app.use(morgan('common'));
 const mongoose = require('mongoose');
 
-const bodyParser = require('body-parser');
-const uuid = require('uuid');
-app.use(bodyParser.json());
+//const uuid = require('uuid');
+require('dotenv').config();
+app.use(express.json());
 
 const Models = require('./models'); //Brings the models or templates from the js file
-let auth = require('./auth')(app);
+
 
 const passport = require('passport');
 require('./passport');
@@ -53,25 +53,7 @@ app.use(cors({
   }
 }));
 
-
-let userSchema = mongoose.Schema({
-  Username: {type: String, required: true},
-  Password: {type: String, required: true},
-  Email: {type: String, required: true},
-  Birthday: Date,
-  FavMovie: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
-});
-
-userSchema.statics.hashPassword = (password) => {
-  return bcrypt.hashSync(password, 10);
-};
-
-userSchema.methods.validatePassword = function(password) {
-  return bcrypt.compareSync(password, this.Password);
-};
-
-
-
+require('./auth')(app);
 
 app.get('/documentation', (req, res) => {                     
   res.sendFile('./public/documentation.html');
