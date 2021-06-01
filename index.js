@@ -1,23 +1,15 @@
 const express = require( 'express');
 const bodyParser = require('body-parser');
-const { check, validationResult } = require('express-validator');
 const morgan = require ( 'morgan' );
-const app = express();
-app.use(morgan('common'));
 const mongoose = require('mongoose');
-
-//const uuid = require('uuid');
-require('dotenv').config();
-app.use(express.json());
-
 const Models = require('./models'); //Brings the models or templates from the js file
-
-
 const passport = require('passport');
-require('./passport');
-app.use(bodyParser.json());
-// call the models from model.js 
+const cors = require('cors');
+const { check, validationResult } = require('express-validator');
 
+require('./passport');
+
+// call the models from model.js 
 const Movies = Models.Movies;
 const Users = Models.Users;
 
@@ -25,23 +17,35 @@ const Users = Models.Users;
 //mongoose.connect('mongodb+srv://mymovie_database:cz6JInSOerzkTSLp@movie-api.04s6s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+const app = express();
 
-app.use(express.static('public'));
+app.use(morgan('common'));
+
+app.use(cors());
+
+app.use(bodyParser.json());
+
+let auth = require('./auth')(app);
 
 //logs into the Terminal
 app.use(morgan('common'));
 
-//Return the documentation html
 app.use(express.static('public'));
+
+//const uuid = require('uuid');
+//require('dotenv').config();
+//app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Here is a movie list of movies!");
+});
+
+//Return the documentation html
 app.get('/documentation', (req, res) => {
    res.sendFile('public/documentation.html', {root: __dirname});
 });
 
 //Cors (Cross-Origin Resource Sharing) allow requests from other domains
-
-const cors = require('cors');
-
-app.use(cors());
 
 // let allowedOrigins = ['http://localhost:8080', 'https://movie-api-1.herokuapp.com'];
 
@@ -55,14 +59,6 @@ app.use(cors());
 //     return callback(null, true);
 //   }
 // }));
-
-require('./auth')(app);
-
-//Querying mongoose models and request data
-
-app.get("/", (req, res) => {
-  res.send("Here is a movie list of movies!");
-});
 
  //Creates a user with requested data
 
