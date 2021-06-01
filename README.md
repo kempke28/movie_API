@@ -35,6 +35,12 @@ Built with:
   * Heroku
   * mongooDB cloud -database
 
-Creating endpoints so a user can interact with the interface such as: creating user, reciving movie lists, delete, update data.
+## Software
+ * Postgres14
+ * Postman
+ * Visual code Studio
+ * aaaand Github
+
+Creating endpoints so a user can interact with the interface such as: creating user, reciving movie lists, delete, update data, Check documentation.html to more information about using 
 
 
