@@ -14,7 +14,7 @@ Built with:
   
 ## Enviroment run into
   * Node.js
-## Librearies
+## Libraries
   * MongoDB
 ## Framework
   * Express
