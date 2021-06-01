@@ -55,19 +55,11 @@ app.use(cors({
 
 require('./auth')(app);
 
-app.get('/documentation', (req, res) => {                     
-  res.sendFile('./public/documentation.html');
- });
-
 //Querying mongoose models and request data
 
-app.get('/', (req, res) => {
-    res.send('Here is the movie list with movies');
-  });
-
-
-
-
+app.get("/", (req, res) => {
+  res.send("Here is a movie list of movies!");
+});
 
  //Creates a user with requested data
 
