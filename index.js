@@ -1,5 +1,5 @@
 const express = require( 'express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const morgan = require ( 'morgan' );
 const mongoose = require('mongoose');
 const Models = require('./models'); //Brings the models or templates from the js file
@@ -23,7 +23,7 @@ app.use(morgan('common'));
 
 app.use(cors());
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 let auth = require('./auth')(app);
 
@@ -33,8 +33,8 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 //const uuid = require('uuid');
-//require('dotenv').config();
-//app.use(express.json());
+require('dotenv').config();
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Here is a movie list of movies!");
