@@ -25,7 +25,7 @@ app.use(cors());
 
 //app.use(bodyParser.json());
 
-let auth = require('./auth')(app);
+require('./auth')(app);
 
 //logs into the Terminal
 app.use(morgan('common'));
@@ -36,6 +36,22 @@ app.use(express.static('public'));
 require('dotenv').config();
 app.use(express.json());
 
+//Cors (Cross-Origin Resource Sharing) allow requests from other domains
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+origin: (origin, callback) => {
+if(!origin) return callback(null, true);
+if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+return callback(new Error(message ), false);
+}
+return callback(null, true);
+}
+}));
+
+
 app.get("/", (req, res) => {
   res.send("Here is a movie list of movies!");
 });
@@ -45,20 +61,6 @@ app.get('/documentation', (req, res) => {
    res.sendFile('public/documentation.html', {root: __dirname});
 });
 
-//Cors (Cross-Origin Resource Sharing) allow requests from other domains
-
-// let allowedOrigins = ['http://localhost:8080', 'https://movie-api-1.herokuapp.com'];
-
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     if(!origin) return callback(null, true);
-//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-//       return callback(new Error(message ), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
 
  //Creates a user with requested data
 
