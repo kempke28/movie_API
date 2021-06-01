@@ -40,7 +40,7 @@ app.get('/documentation', (req, res) => {
 
 const cors = require('cors');
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'https://movie-api-1.herokuapp.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
