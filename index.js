@@ -1,4 +1,5 @@
 const express = require( 'express');
+const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const morgan = require ( 'morgan' );
 const app = express();
