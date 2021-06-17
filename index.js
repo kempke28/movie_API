@@ -145,7 +145,7 @@ app.post('/movies', passport.authenticate('jwt', { session: false }), (req, res)
 
 //Get all movies from database  
 
-app.get("/movies", passport.authenticate('jwt', { session: false }) function (req, res) {
+app.get("/movies", passport.authenticate('jwt', { session: false }), function (req, res) {
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies);
