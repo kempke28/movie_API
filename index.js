@@ -290,9 +290,9 @@ app.delete('/Movies/:Title', passport.authenticate('jwt', { session: false }),  
 
 //Update favorite movies of users
 
-app.post('/users/:Username/Movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users/:Username/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $push: { FavMovies: req.params.MovieID }
+     $push: { FavMovie: req.params.movieID }
    },
    { new: true }, 
   (err, updatedUser) => {
