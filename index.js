@@ -290,7 +290,7 @@ app.delete('/Movies/:Title', passport.authenticate('jwt', { session: false }),  
 
 //Update favorite movies of users
 
-app.push('/users/:Username/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.patch('/users/:Username/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $addToSet: { FavMovie: req.params.movieID }
    },
