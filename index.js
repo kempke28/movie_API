@@ -38,7 +38,7 @@ app.use(express.json());
 
 //Cors (Cross-Origin Resource Sharing) allow requests from other domains
 
-// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', http://localhost:1" 'https://my-flix-movies.netlify.app/'];
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', http://localhost:1" 'https://my-flix-app-movies.netlify.app'];
 
 app.use(cors());
 
