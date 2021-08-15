@@ -42,10 +42,13 @@ app.use(express.json());
 
 app.use(cors());
 
-
+/**
+ * This function/method call the first html page, a welcome page
+ */
 app.get("/", (req, res) => {
   res.send("Here is a movie list of movies!");
 });
+
 
 //Return the documentation html
 app.get('/documentation', (req, res) => {
@@ -53,8 +56,15 @@ app.get('/documentation', (req, res) => {
 });
 
 
- //Creates a user with requested data
-
+/**Creates a user with requested data
+  * This function creates a new user inside de app
+  * doesnt require an Authentication
+  * @method addUser
+  * @param {string} username endpoint https://my-flix-app-movies.netlify.app/users
+  * @param {string} username validates the input using express-package
+  * @param {string} password creates a password through the input
+  * @param {string} email get the email of the user.
+  */
 app.post('/users', 
 [
   //These are characteristics that a password must have. Or this must me hashed.
@@ -97,7 +107,11 @@ app.post('/users',
 
 
 
-// Creates a Movie with requested data.
+/**
+ * Creates a Movie with requested data.
+ * @param {func} passportAuthetication using a webtoken
+ * @param {Return} if movie already exists in database will not do anything if it doesn't will create some data about it.
+ */
 
 app.post('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ Title: req.body.Title })
@@ -134,6 +148,14 @@ app.post('/movies', passport.authenticate('jwt', { session: false }), (req, res)
 });
 
 
+/**
+ * makes a call to get all movies from DB
+ * @param {string} get movies from endpoint https://my-flix-app-movies.netlify.app/movies
+ * @param {func} passportAuthetication is required to call movies with web token.
+ * @param {func} uses "find" to find movies the movie list
+ * @param {array} returns lists of movies.
+ */
+
 //Get all movies from database  
 
 app.get("/movies", passport.authenticate('jwt', { session: false }), function (req, res) {
@@ -148,7 +170,14 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), function (r
 });
 
  
-//Get all users
+
+/**
+ *  Gets all users
+ * @param {string} get users from endpoint https://my-flix-app-movies.netlify.app/users
+ * @param {func} passportAuthetication is required to call movies with web token.
+ * @param {func} uses "find" to find movies the users list
+ * @param {array} returns lists of users.
+ */
 
 app.get('/users', passport.authenticate('jwt', { session: false }),  (req, res) => {
   Users.find()
@@ -162,7 +191,13 @@ app.get('/users', passport.authenticate('jwt', { session: false }),  (req, res) 
 });
 
 
-// Gets and display users by username
+/**
+ *  Gets an specific user from the list
+ * @param {string} get users from endpoint https://my-flix-app-movies.netlify.app/users/:username
+ * @param {func} passportAuthetication is required to call movies with web token.
+ * @param {func} uses "find" to find user the users list
+ * @param {array} returns lists of users.
+ */
 
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.Username })
@@ -175,8 +210,13 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
     });
 });
 
-// Gets and display of selected movie
-
+/**
+ *  Gets an specific movie from the list
+ * @param {string} get users from endpoint https://my-flix-app-movies.netlify.app/Movies/:Title
+ * @param {func} passportAuthetication is required to call movies with web token.
+ * @param {func} uses "find" to find movies the users list
+ * @param {array} returns lists of users.
+ */
 
 app.get('/Movies/:Title', passport.authenticate('jwt', { session: false }),  (req, res) => {
   Movies.findOne({ Title: req.params.Title })
@@ -190,7 +230,13 @@ app.get('/Movies/:Title', passport.authenticate('jwt', { session: false }),  (re
 });
 
 
-// Update users by name    
+/**
+* Update a users info by username.
+* @method updateUser
+* @param {string} userNameEndpoint - https://flixinfo.herokuapp.com/users/:Username
+* @param {Array} passportAuthetication is required to call movies with web token
+* @param {func} update user with new input data
+ */
 
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
@@ -213,7 +259,13 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 
-//Update movies by Title
+/**
+* Update a movies by Title.
+* @method updateMovie
+* @param {string} userNameEndpoint - https://flixinfo.herokuapp.com/Movies/:Title
+* @param {Array} passportAuthetication is required to call movies with web token
+* @param {func} update movie with new input data
+ */
 
 app.put('/Movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOneAndUpdate({ Title: req.params.Title }, { $set:
@@ -244,7 +296,13 @@ app.put('/Movies/:Title', passport.authenticate('jwt', { session: false }), (req
 });
 
 
-//Delete users by username
+/**
+  * Function to remove user from the list
+  * @function deleteuser
+  * @param {string} userNameMoviesEndpoint - https://flixinfo.herokuapp.com/users/:username
+  * @param {Array} passportAuthetication is required to call movies with web token.
+  * @param {func} user removed.
+   */
 
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
@@ -262,7 +320,13 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 
-//Delete selected movies 
+/**
+  * Function to remove user from the list
+  * @function deletemovie
+  * @param {string} userNameMoviesEndpoint - https://flixinfo.herokuapp.com/Movies/:tittle
+  * @param {Array} passportAuthetication is required to call movies with web token.
+  * @param {func} movie removed.
+   */
 
 app.delete('/Movies/:Title', passport.authenticate('jwt', { session: false }),  (req, res) => {
   Movies.findOneAndRemove({ Title: req.params.Title })
@@ -279,7 +343,13 @@ app.delete('/Movies/:Title', passport.authenticate('jwt', { session: false }),  
     });
 });
 
-//Update favorite movies of users
+/**
+* Function to add movie to favorite list of user
+* @function addToFavorites
+* @param {string} userNameMoviesEndpoint - https://flixinfo.herokuapp.com/users/:username/favourites/:MovieID
+* @param {Array} passportAuthetication is required to call movies with web token.
+* @param {func} movie is addded to user favorites.
+ */
 
 app.patch('/users/:Username/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
