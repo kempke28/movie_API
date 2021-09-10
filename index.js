@@ -364,6 +364,28 @@ app.patch('/users/:Username/favorites/:movieID', passport.authenticate('jwt', { 
   });
 });
 
+/**
+* Function to remove movie from favorite list of user
+* @function removefromFavorites
+* @param {string} userNameMoviesEndpoint - https://movie-api-1.herokuapp.com/users/:username/favorites/:MovieID
+* @param {Array} passportAuthetication is required to call movies with web token.
+* @param {func} movie is removed to user favorites.
+ */
+
+app.delete('/users/:Username/favorites/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { FavMovies: req.params.movieID }
+   },
+   { new: true }, 
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
